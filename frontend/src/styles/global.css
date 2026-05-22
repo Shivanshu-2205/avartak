@@ -1,0 +1,53 @@
+:root {
+  --paper: #f5f0e8;
+  --paper-dark: #ede7d3;
+  --paper-line: #c8c0a8;
+  --ink: #1a1208;
+  --ink-faded: #5a4e3a;
+  --ink-ghost: #9a8e78;
+  --red: #c0392b;
+  --key-bg: #2c2416;
+  --key-top: #3d3220;
+
+  --font-display: 'Special Elite', serif;
+  --font-mono: 'Courier Prime', monospace;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  background: var(--key-bg);
+  color: var(--ink);
+  font-family: var(--font-display);
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+}
+
+input {
+  font-family: inherit;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--ink-ghost);
+  border-radius: 2px;
+}
