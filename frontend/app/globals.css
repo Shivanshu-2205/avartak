@@ -1,0 +1,90 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Avartak Color System */
+  --background: #1C1917;
+  --background-footer: #211D1A;
+  --foreground: #F5F0E8;
+  --card: #F5F0E8;
+  --card-foreground: #1C1917;
+  --popover: #F5F0E8;
+  --popover-foreground: #1C1917;
+  --primary: #C0392B;
+  --primary-foreground: #F5F0E8;
+  --secondary: #F5F0E8;
+  --secondary-foreground: #1C1917;
+  --muted: #3D3835;
+  --muted-foreground: #A8A29E;
+  --accent: #B8960C;
+  --accent-foreground: #1C1917;
+  --destructive: #C0392B;
+  --destructive-foreground: #F5F0E8;
+  --border: #3D3835;
+  --input: #2D2926;
+  --ring: #C0392B;
+  --radius: 0.5rem;
+  
+  /* String colors */
+  --string-red: #C0392B;
+  --pin-gold: #B8960C;
+  --cream: #F5F0E8;
+  --ink: #1C1917;
+}
+
+@theme inline {
+  --font-sans: var(--font-inter), 'Inter', system-ui, sans-serif;
+  --font-serif: var(--font-playfair), 'Playfair Display', Georgia, serif;
+  --font-mono: 'Geist Mono', monospace;
+  --color-background: var(--background);
+  --color-background-footer: var(--background-footer);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-string-red: var(--string-red);
+  --color-pin-gold: var(--pin-gold);
+  --color-cream: var(--cream);
+  --color-ink: var(--ink);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Paper texture for cards */
+.paper-texture {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  background-blend-mode: soft-light;
+  background-size: 200px 200px;
+}
