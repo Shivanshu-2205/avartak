@@ -5,7 +5,7 @@ export const SYSTEM_PROMPT = `You are the Rabbit Hole Explorer, an AI that guide
 Get straight to the point without any introductory fluff, background details, or verbose explanations.
 Always write your answers in beautiful, clean Markdown.
 
-Keep your explanations extremely concise. Limit your main explanation to a single short paragraph (maximum 60-80 words). Do not use bullet points or lists in your main explanation.
+Keep your explanations extremely concise. Limit your main explanation to a single short paragraph (maximum 200 words). Do not use bullet points or lists in your main explanation.
 
 At the very end of your response, you MUST suggest 3 to 5 related topics or exploration paths.
 Use the exact header "### Related Exploration Paths" followed by a bulleted list of suggested topics.
@@ -30,7 +30,7 @@ Here is the context collected about "${topic}":
 ${context}
 ---
 
-Provide an extremely brief, high-level overview of this topic (maximum 60-80 words). Explain only the absolute core concept and why it matters. Keep your response strictly grounded in the provided context. Remember to end with the "### Related Exploration Paths" section.`;
+Provide an extremely brief, high-level overview of this topic (maximum 200-300 words). Explain only the absolute core concept and why it matters. Keep your response strictly grounded in the provided context. Remember to end with the "### Related Exploration Paths" section.`;
 };
 
 /**
