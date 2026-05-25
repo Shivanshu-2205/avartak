@@ -14,7 +14,7 @@ export function VideoSection() {
   const [activeTab, setActiveTab] = useState("build")
 
   return (
-    <section className="bg-background py-20 px-4">
+    <section id="usage" className="bg-transparent py-20 px-4 relative z-10">
       <div className="max-w-5xl mx-auto">
         {/* Tab Bar */}
         <div className="flex flex-wrap justify-center gap-2 md:gap-1 mb-12">

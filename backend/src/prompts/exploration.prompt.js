@@ -30,7 +30,7 @@ Here is the context collected about "${topic}":
 ${context}
 ---
 
-Provide an extremely brief, high-level overview of this topic (maximum 60-80 words). Explain only the absolute core concept and why it matters. Keep your response strictly grounded in the provided context. Remember to end with the "### Related Exploration Paths" section.`;
+Provide an explanation that fully covers the topic and feeds the user with his curiosity.  Explain only the absolute core concept and why it matters. Keep your response strictly grounded in the provided context. Remember to end with the "### Related Exploration Paths" section.`;
 };
 
 /**
@@ -49,6 +49,6 @@ ${context}
 
 The user is asking a follow-up question: "${question}".
 
-Provide a direct, extremely brief, and focused answer (maximum 40-60 words, 1-2 sentences) based on the context. Do not write a detailed explanation. Remember to end with the "### Related Exploration Paths" section suggesting next steps relevant to this question.`;
+Provide an answer that fully covers the question and feeds the user with his curiosity. Do not write a detailed explanation. Remember to end with the "### Related Exploration Paths" section suggesting next steps relevant to this question.`;
 };
 

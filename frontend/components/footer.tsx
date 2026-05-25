@@ -59,7 +59,7 @@ export function Footer() {
   }
 
   return (
-    <footer id="footer" className="bg-[#211D1A] py-16 px-4">
+    <footer id="footer" className="bg-[#0a0a0f]/90 py-16 px-4 border-t border-[#c9a84c]/20 relative z-10">
       <div className="max-w-5xl mx-auto">
         {/* Desktop: Fixed bounds container */}
         <div

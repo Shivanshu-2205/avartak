@@ -5,6 +5,9 @@ import { logger } from './utils/logger.js';
 import topicRouter from './routes/topic.routes.js';
 import askRouter from './routes/ask.routes.js';
 import { ContextService } from './services/context.service.js';
+import { requireAuth } from './middlewares/auth.middleware.js';
+import authRouter from './routes/auth.routes.js';
+import userRouter from './routes/user.routes.js';
 
 const app = express();
 
@@ -22,9 +25,11 @@ app.use((req, res, next) => {
   next();
 });
 
-// 2. Register Routes
-app.use('/api/topic', topicRouter);
-app.use('/api/ask', askRouter);
+// 2. Register Routes (protected by requireAuth middleware)
+app.use('/api/auth', authRouter);
+app.use('/api/user', requireAuth, userRouter);
+app.use('/api/topic', requireAuth, topicRouter);
+app.use('/api/ask', requireAuth, askRouter);
 
 // Health check and status endpoint
 app.get('/api/status', (req, res) => {

@@ -90,7 +90,7 @@ export function Features() {
   }
 
   return (
-    <section id="pricing" className="bg-background py-24 px-4">
+    <section id="features" className="bg-transparent py-24 px-4 relative z-10">
       <div className="max-w-5xl mx-auto">
         {/* Heading */}
         <div className="text-center mb-8">

@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Avartak — Feed Your Curiosity</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,900;1,900&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --ink: #0a0a0f;
+    --paper: #f5f0e8;
+    --gold: #c9a84c;
+    --rust: #b84a2a;
+    --mist: #d4cfc6;
+    --deep: #1a1420;
+  }
+
+  html, body {
+    width: 100%; height: 100%;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: 'Cormorant Garamond', serif;
+    overflow-x: hidden;
+  }
+
+  /* ── CANVAS ── */
+  #cosmos {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+  }
+
+  /* ── GRAIN OVERLAY ── */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
+    background-size: 200px 200px;
+    opacity: 0.4;
+  }
+
+  /* ── HERO ── */
+  #hero {
+    position: relative;
+    z-index: 10;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0 8vw;
+  }
+
+  .eyebrow {
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(0.55rem, 2vw, 0.9rem);
+    letter-spacing: 0.35em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 2vh;
+    opacity: 0;
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: clamp(3rem, 15vw, 11rem);
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    color: var(--paper);
+    opacity: 0;
+  }
+
+  h1 span {
+    color: var(--gold);
+    font-style: italic;
+  }
+
+  .tagline {
+    font-size: clamp(1.2rem, 3.5vw, 2.2rem);
+    font-style: italic;
+    color: var(--mist);
+    margin-top: 3vh;
+    max-w: 600px;
+    line-height: 1.3;
+    opacity: 0;
+  }
+
+  .desc {
+    font-size: clamp(0.9rem, 1.8vw, 1.15rem);
+    color: rgba(212, 207, 198, 0.65);
+    margin-top: 2vh;
+    max-w: 480px;
+    line-height: 1.6;
+    opacity: 0;
+  }
+
+  .actions {
+    display: flex;
+    gap: 20px;
+    margin-top: 6vh;
+    opacity: 0;
+  }
+
+  .btn {
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(0.65rem, 1.5vw, 0.8rem);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 18px 36px;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+
+  .btn-gold {
+    background: var(--gold);
+    color: var(--ink);
+    border: none;
+  }
+
+  .btn-gold:hover {
+    background: var(--paper);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--mist);
+    border: 1px solid rgba(212, 207, 198, 0.3);
+  }
+
+  .btn-outline:hover {
+    color: var(--gold);
+    border-color: var(--gold);
+  }
+
+  .watermark {
+    position: fixed;
+    right: 4vw;
+    top: 50%;
+    transform: translateY(-50%) rotate(90deg);
+    transform-origin: right center;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    color: rgba(201, 168, 76, 0.3);
+    text-transform: uppercase;
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  /* animations */
+  .fade-in {
+    animation: fadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  @keyframes fadeIn {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .delay-1 { animation-delay: 0.3s; }
+  .delay-2 { animation-delay: 0.6s; }
+  .delay-3 { animation-delay: 0.9s; }
+  .delay-4 { animation-delay: 1.2s; }
+  .delay-5 { animation-delay: 1.5s; }
+
+</style>
+</head>
+<body>
+
+<canvas id="cosmos"></canvas>
+
+<div class="watermark">Est. 2025 — Kanpur, India</div>
+
+<section id="hero">
+  <div class="eyebrow fade-in delay-1">Where curiosity finds its home</div>
+  <h1 class="fade-in delay-2">Avar<span>tak</span></h1>
+  <div class="tagline fade-in delay-3">A cure to all your hunger of curiosity.</div>
+  <div class="desc fade-in delay-4">
+    Every question you've ever sat with. Every wonder that kept you up. Every rabbit hole you wished you could fall deeper into — this is where you begin.
+  </div>
+  <div class="actions fade-in delay-5">
+    <button class="btn btn-gold">Start Exploring</button>
+    <button class="btn btn-outline">Learn More</button>
+  </div>
+</section>
+
+<script>
+const canvas = document.getElementById('cosmos');
+const ctx = canvas.getContext('2d');
+
+let W, H;
+function resize() {
+  W = canvas.width = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+}
+
+class Particle {
+  constructor() { this.reset(true); }
+  reset(initial = false) {
+    this.x = Math.random() * W;
+    this.y = Math.random() * H;
+    this.r = Math.random() * 1.8 + 0.2;
+    this.baseOpacity = Math.random() * 0.7 + 0.1;
+    this.opacity = initial ? Math.random() * this.baseOpacity : 0;
+    this.speed = Math.random() * 0.25 + 0.04;
+    this.angle = Math.random() * Math.PI * 2;
+    this.vx = Math.cos(this.angle) * this.speed;
+    this.vy = Math.sin(this.angle) * this.speed;
+    this.twinkle = Math.random() * Math.PI * 2;
+    this.twinkleSpeed = Math.random() * 0.02 + 0.005;
+    this.gold = Math.random() < 0.12;
+    this.life = 0;
+    this.maxLife = 600 + Math.random() * 400;
+  }
+  update() {
+    this.x += this.vx; this.y += this.vy;
+    this.twinkle += this.twinkleSpeed;
+    this.life++;
+    const fade = this.life < 60 ? this.life / 60 : this.life > this.maxLife - 60 ? (this.maxLife - this.life) / 60 : 1;
+    this.opacity = this.baseOpacity * fade * (0.7 + 0.3 * Math.sin(this.twinkle));
+    if (this.life >= this.maxLife || this.x < -5 || this.x > W + 5 || this.y < -5 || this.y > H + 5) this.reset(false);
+  }
+  draw() {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+    ctx.fillStyle = this.gold 
+      ? `rgba(201,168,76,${this.opacity})` 
+      : `rgba(245,240,232,${this.opacity})`;
+    ctx.fill();
+  }
+}
+
+class Nebula {
+  constructor() { this.reset(); }
+  reset() {
+    this.x = Math.random() * W;
+    this.y = Math.random() * H;
+    this.r = Math.random() * 280 + 120;
+    this.hue = Math.random() < 0.4 ? 35 : Math.random() < 0.5 ? 10 : 220;
+    this.opacity = Math.random() * 0.045 + 0.01;
+    this.vx = (Math.random() - 0.5) * 0.08;
+    this.vy = (Math.random() - 0.5) * 0.05;
+    this.life = 0;
+    this.maxLife = 1200 + Math.random() * 800;
+  }
+  update() {
+    this.x += this.vx; this.y += this.vy; this.life++;
+    if (this.life > this.maxLife) this.reset();
+  }
+  draw() {
+    const fade = this.life < 120 ? this.life / 120 : this.life > this.maxLife - 120 ? (this.maxLife - this.life) / 120 : 1;
+    const grd = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.r);
+    grd.addColorStop(0, `hsla(${this.hue}, 60%, 55%, ${this.opacity * fade})`);
+    grd.addColorStop(1, `hsla(${this.hue}, 60%, 40%, 0)`);
+    ctx.fillStyle = grd;
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+    ctx.fill();
+  }
+}
+
+class Probe {
+  constructor() { this.reset(); }
+  reset() {
+    this.x = -20;
+    this.y = Math.random() * H * 0.8 + H * 0.1;
+    this.speed = Math.random() * 0.6 + 0.3;
+    this.angle = (Math.random() - 0.5) * 0.3;
+    this.trail = [];
+    this.life = 0;
+    this.maxLife = W / this.speed + 200;
+    this.size = Math.random() * 1.5 + 0.8;
+  }
+  update() {
+    this.x += this.speed;
+    this.y += Math.sin(this.life * 0.02) * 0.4;
+    this.trail.push({ x: this.x, y: this.y });
+    if (this.trail.length > 80) this.trail.shift();
+    this.life++;
+    if (this.x > W + 40) this.reset();
+  }
+  draw() {
+    if (this.trail.length < 2) return;
+    for (let i = 1; i < this.trail.length; i++) {
+      const t = i / this.trail.length;
+      ctx.beginPath();
+      ctx.moveTo(this.trail[i - 1].x, this.trail[i - 1].y);
+      ctx.lineTo(this.trail[i].x, this.trail[i].y);
+      ctx.strokeStyle = `rgba(201,168,76,${t * 0.35})`;
+      ctx.lineWidth = t * this.size;
+      ctx.stroke();
+    }
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size + 0.5, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(245,240,232,0.9)';
+    ctx.fill();
+  }
+}
+
+let particles, nebulae, lines;
+function init() {
+  particles = Array.from({ length: 220 }, () => new Particle());
+  nebulae = Array.from({ length: 5 }, () => new Nebula());
+  lines = Array.from({ length: 3 }, () => new Probe());
+}
+
+function loop() {
+  ctx.clearRect(0, 0, W, H);
+
+  // deep bg
+  const bg = ctx.createRadialGradient(W * 0.35, H * 0.4, 0, W * 0.5, H * 0.5, Math.max(W, H) * 0.9);
+  bg.addColorStop(0, '#1a1420');
+  bg.addColorStop(0.5, '#0e0b12');
+  bg.addColorStop(1, '#06060a');
+  ctx.fillStyle = bg;
+  ctx.fillRect(0, 0, W, H);
+
+  nebulae.forEach(n => { n.update(); n.draw(); });
+  particles.forEach(p => { p.update(); p.draw(); });
+  lines.forEach(l => { l.update(); l.draw(); });
+
+  requestAnimationFrame(loop);
+}
+
+window.addEventListener('resize', resize);
+resize();
+init();
+loop();
+
+// subtle parallax
+document.addEventListener('mousemove', e => {
+  const dx = (e.clientX / W - 0.5) * 8;
+  const dy = (e.clientY / H - 0.5) * 5;
+  document.getElementById('hero').style.transform = `translate(${dx}px, ${dy}px)`;
+});
+</script>
+</body>
+</html>
