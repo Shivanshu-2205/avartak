@@ -837,6 +837,14 @@ export default function Home() {
               </a>
             </li>
             <li>
+              <a 
+                href="#footer"
+                className="font-mono text-[10px] tracking-[0.18em] text-[#d4cfc6]/60 hover:text-[#c9a84c] uppercase transition-all no-underline"
+              >
+                Contact
+              </a>
+            </li>
+            <li>
               <button 
                 onClick={() => setShowLoginModal(true)}
                 className="font-mono text-[10px] tracking-[0.18em] text-[#d4cfc6]/60 hover:text-[#c9a84c] uppercase transition-all bg-transparent border-none cursor-pointer"
@@ -927,11 +935,11 @@ export default function Home() {
                   <h3 className="font-serif text-2xl font-bold border-b border-[#1c1917]/10 pb-2 mb-4">Sleuth Plan</h3>
                   <div className="font-serif text-4xl font-extrabold mb-6">$0<span className="text-sm font-normal text-muted-foreground">/mo</span></div>
                   
-                  <ul className="space-y-3.5 mb-8 text-xs font-medium">
-                    <li className="flex items-center gap-2">🔍 5 Active Investigation Boards</li>
-                    <li className="flex items-center gap-2">💡 Basic LLM Path Suggestions</li>
-                    <li className="flex items-center gap-2">💾 Local Context Saving</li>
-                    <li className="flex items-center gap-2">🌐 Standard Wikipedia Data Access</li>
+                  <ul className="space-y-3.5 mb-8 text-xs font-semibold text-[#1c1917]">
+                    <li className="flex items-center gap-2 before:content-['—'] before:text-[#B8960C] before:font-bold">5 Active Investigation Boards</li>
+                    <li className="flex items-center gap-2 before:content-['—'] before:text-[#B8960C] before:font-bold">Basic LLM Path Suggestions</li>
+                    <li className="flex items-center gap-2 before:content-['—'] before:text-[#B8960C] before:font-bold">Local Context Saving</li>
+                    <li className="flex items-center gap-2 before:content-['—'] before:text-[#B8960C] before:font-bold">Standard Wikipedia Data Access</li>
                   </ul>
                 </div>
                 
@@ -958,11 +966,11 @@ export default function Home() {
                   <h3 className="font-serif text-2xl font-bold border-b border-[#1c1917]/10 pb-2 mb-4">Master Detective</h3>
                   <div className="font-serif text-4xl font-extrabold mb-6">$9<span className="text-sm font-normal text-muted-foreground">/mo</span></div>
                   
-                  <ul className="space-y-3.5 mb-8 text-xs font-medium">
-                    <li className="flex items-center gap-2">🔥 Unlimited Investigation Boards</li>
-                    <li className="flex items-center gap-2">🦉 Priority Access to Suggestion Engine</li>
-                    <li className="flex items-center gap-2">🧬 Advanced Context Retrieval & Deep Search</li>
-                    <li className="flex items-center gap-2">🤝 Board Sharing & Collaboration</li>
+                  <ul className="space-y-3.5 mb-8 text-xs font-semibold text-[#1c1917]">
+                    <li className="flex items-center gap-2 before:content-['—'] before:text-[#C0392B] before:font-bold">Unlimited Investigation Boards</li>
+                    <li className="flex items-center gap-2 before:content-['—'] before:text-[#C0392B] before:font-bold">Priority Access to Suggestion Engine</li>
+                    <li className="flex items-center gap-2 before:content-['—'] before:text-[#C0392B] before:font-bold">Advanced Context Retrieval & Deep Search</li>
+                    <li className="flex items-center gap-2 before:content-['—'] before:text-[#C0392B] before:font-bold">Board Sharing & Collaboration</li>
                   </ul>
                 </div>
                 
@@ -979,7 +987,7 @@ export default function Home() {
         </section>
 
         {/* 5. Draggable Footer Section ("Contact Us" / "About Us") */}
-        <Footer />
+        <Footer onOpenLogin={() => setShowLoginModal(true)} />
 
         {/* Infinite Scroll Ticker at the absolute bottom of page */}
         <div className="w-full border-t border-[#c9a84c]/20 bg-[#0a0a0f]/90 overflow-hidden py-3 select-none relative z-20">
@@ -1011,19 +1019,13 @@ export default function Home() {
 
       </div>
 
-      {/* Auth overlay popup card containing the Polaroid signup/login form */}
+      {/* Auth modal — clean centered card, click outside to close */}
       {showLoginModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-md p-4 animate-fade-in">
-          <div className="relative">
-            {/* Close modal button */}
-            <button 
-              onClick={() => setShowLoginModal(false)}
-              className="absolute -top-3 -right-3 z-30 p-1.5 bg-[#C0392B] hover:bg-[#A93226] text-white rounded-full transition-colors cursor-pointer shadow-lg border border-white/20"
-            >
-              <X className="w-4 h-4" />
-            </button>
-            
-            {/* Polaroid Login Card component we customized */}
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4"
+          onClick={() => setShowLoginModal(false)}
+        >
+          <div onClick={(e) => e.stopPropagation()}>
             <Hero onLogin={handleLogin} />
           </div>
         </div>
